@@ -70,24 +70,32 @@ class LinkedList:
                 current_node.data = val
             else:
                 print("Index not present")
+
+    def rev(self):
+        self.prev=None
+        current_node=self.head
+        self.next=current_node.next
+        while (current_node != None):
+            self.next=current_node.next
+            current_node.next=self.prev
+            self.prev=current_node
+            current_node=current_node.next
+        self.head=self.prev
+
     def printLL(self):
         current_node = self.head
         while(current_node):
             print(current_node.data)
             current_node = current_node.next
 llist = LinkedList()
-llist.insertAtEnd('a')
-llist.insertAtEnd('b')
-llist.insertAtBegin('c')
-llist.insertAtEnd('d')
-llist.insertAtIndex('g', 2)
+llist.insertAtBegin('1')
+llist.insertAtBegin('2')
+llist.insertAtBegin('3')
+llist.insertAtBegin('4')
+llist.insertAtBegin('5')
 
-print("Node Data")
+print("Node : ")
 llist.printLL()
 
-print("\nLinked list after removing a node:")
-llist.printLL()
-
-print("\nUpdate node Value")
-llist.updateNode('z', 0)
+llist.rev()
 llist.printLL()

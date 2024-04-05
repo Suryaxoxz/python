@@ -28,6 +28,53 @@ class DoublyLinkedList:
             new_node.next = self.head
             self.head = new_node
 
+    def insert_at_position(self, data, position):
+        if position < 0:
+            print("Invalid position")
+            return
+        new_node = Node(data)
+        if position == 0:
+            self.prepend(data)
+            return
+        current = self.head
+        current_position = 0
+        while current_position < position - 1 and current.next:
+            current = current.next
+            current_position += 1
+        if current is None:
+            print("Position out of range")
+            return
+        new_node.next = current.next
+        new_node.prev = current
+        if current.next:
+            current.next.prev = new_node
+        current.next = new_node
+
+
+    def delete_at_position(self, position):
+        if position < 0:
+            print("Invalid position")
+            return
+        if self.head is None:
+            print("List is empty")
+            return
+        current = self.head
+        if position == 0:
+            self.head = current.next
+            if self.head:
+                self.head.prev = None
+            return
+        current_position = 0
+        while current_position < position and current.next:
+            current = current.next
+            current_position += 1
+        if current is None:
+            print("Position out of range")
+            return
+        if current.next:
+            current.next.prev = current.prev
+        current.prev.next = current.next
+    
     def delete(self, data):
         current = self.head
         while current:
